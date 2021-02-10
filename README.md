@@ -6,6 +6,7 @@ Shopping cart implementation with nest.js.
 
 1. Run `npm install`
 2. Copy `.env.example` to `.env` and fill it with your data
+3. Run tests `npm run test`
 
 ## Running with docker
 
@@ -27,4 +28,4 @@ $ npm run start:prod
 ```
 ## License
 
-  Nest is [MIT licensed](LICENSE).
+  [MIT licensed](LICENSE).

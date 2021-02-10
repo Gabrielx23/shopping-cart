@@ -8,6 +8,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
+import {Exclude} from "class-transformer";
 
 @Entity('users')
 @Unique(['email'])
@@ -26,7 +27,12 @@ export class UserEntity extends BaseEntity {
 
   @ApiProperty({ example: 'Demo2020' })
   @Column('text')
+  @Exclude()
   password: string;
+
+  @Column({nullable: true})
+  @Exclude()
+  token: string;
 
   @ApiProperty({ example: '2020-08-10T05:59:36.708Z' })
   @CreateDateColumn({

@@ -13,7 +13,7 @@ import {CreateUserService} from "../Services/create-user.service";
 export class RegisterController {
     constructor(
         private readonly createUserService: CreateUserService,
-        private readonly passwordService: PasswordService
+        private readonly passwordService: PasswordService,
     ) {}
 
     @Post('register')
