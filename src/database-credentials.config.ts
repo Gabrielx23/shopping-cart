@@ -1,4 +1,5 @@
 import {UserEntity} from "./User/user.entity";
+import {ProductEntity} from "./Product/product.entity";
 
 export const databaseCredentialsConfig = () => ({
   port: Number(process.env.PORT),
@@ -12,6 +13,6 @@ export const databaseCredentialsConfig = () => ({
     database: process.env.DB_DATABASE,
     synchronize: true,
     logging: false,
-    entities: [UserEntity],
+    entities: [UserEntity, ProductEntity],
   },
 });

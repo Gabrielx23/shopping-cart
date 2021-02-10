@@ -8,9 +8,11 @@ import {AuthDTO} from "../../DTO/auth.dto";
 import * as jwt from 'jsonwebtoken';
 import {JwtTokenTypeEnum} from "../../Enum/jwt-token-type.enum";
 import {UnauthorizedException} from "@nestjs/common";
+import {AuthTokenPayloadDTO} from "../../DTO/auth-token-payload.dto";
 
 const userRepositoryMock = () => ({
     save: jest.fn(),
+    findOne: jest.fn(),
 });
 
 const configServiceMock = () => ({
@@ -35,6 +37,20 @@ describe('AuthService', () => {
         repository = await module.get(UserRepository);
         config = await module.get(ConfigService);
         service = new AuthService(repository, config);
+    });
+
+    describe('getUserFromTokenPayload', () => {
+        const payload = new AuthTokenPayloadDTO();
+        payload.email = 'email@test.pl';
+
+        it('uses repository to obtain user from token payload', async () => {
+            jest.spyOn(repository, 'findOne').mockResolvedValue(user);
+
+            const result = await service.getUserFromTokenPayload(payload);
+
+            expect(repository.findOne).toHaveBeenCalledWith({email: payload.email});
+            expect(result).toEqual(user);
+        });
     });
 
     describe('logout', () => {

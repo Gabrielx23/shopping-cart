@@ -18,6 +18,10 @@ export class AuthService {
         private readonly configService: ConfigService,
     ) {}
 
+    public async getUserFromTokenPayload(payload: AuthTokenPayloadDTO): Promise<UserEntity> {
+        return await this.users.findOne({email: payload.email});
+    }
+
     public async decodeToken(token: string, tokenType: JwtTokenTypeEnum): Promise<AuthTokenPayloadDTO | any> {
         let secret = this.configService.get(EnvKeyEnum.JWTSecretKey);
 

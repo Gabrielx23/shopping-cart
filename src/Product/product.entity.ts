@@ -9,30 +9,26 @@ import {
 } from 'typeorm';
 import {ApiProperty} from '@nestjs/swagger';
 import {Exclude} from "class-transformer";
+import {Matches} from "class-validator";
 
-@Entity('users')
-@Unique(['email'])
-export class UserEntity extends BaseEntity {
+@Entity('products')
+export class ProductEntity extends BaseEntity {
     @ApiProperty({example: '91e56daf-04ef-4bbc-abe7-5d3a8ee41101'})
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @ApiProperty({example: 'John Doe'})
+    @ApiProperty({example: 'Product 1'})
     @Column('text')
     name: string;
 
     @ApiProperty({example: 'john.doe@hotmail.com'})
     @Column('text')
-    email: string;
+    price: string;
 
-    @ApiProperty({example: 'Demo2020'})
+    @ApiProperty({example: 'http://localhost:3000/products/91e56daf-04ef-4bbc-abe7-5d3a8ee41101/image'})
     @Column('text')
     @Exclude()
-    password: string;
-
-    @Column({nullable: true})
-    @Exclude()
-    token: string;
+    image: string;
 
     @ApiProperty({example: '2020-08-10T05:59:36.708Z'})
     @CreateDateColumn({
