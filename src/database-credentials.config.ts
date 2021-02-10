@@ -1,3 +1,5 @@
+import {UserEntity} from "./User/user.entity";
+
 export const databaseCredentialsConfig = () => ({
   port: Number(process.env.PORT),
   jwtSecret: process.env.JWT_SECRET,
@@ -10,6 +12,6 @@ export const databaseCredentialsConfig = () => ({
     database: process.env.DB_DATABASE,
     synchronize: true,
     logging: false,
-    entities: [],
+    entities: [UserEntity],
   },
 });

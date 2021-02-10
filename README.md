@@ -4,7 +4,8 @@ Shopping cart implementation with nest.js.
 
 ## Before first run
 
-1. Copy .env.example to .env and fill it with your data
+1. Run `npm install`
+2. Copy `.env.example` to `.env` and fill it with your data
 
 ## Running with docker
 
@@ -15,9 +16,6 @@ $ docker-compose up --build -V -d
 ## Running without docker
 
 ```bash
-#install
-$ npm install
-
 # development
 $ npm run start
 
