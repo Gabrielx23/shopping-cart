@@ -4,9 +4,9 @@ import {
     ApiTags,
 } from '@nestjs/swagger';
 import {Body, Controller, Post, UsePipes, ValidationPipe} from '@nestjs/common';
-import {CreateUserService} from "../../User/Services/create-user.service";
 import {RegisterDTO} from "../DTO/register.dto";
 import {PasswordService} from "../Services/password.service";
+import {CreateUserService} from "../Services/create-user.service";
 
 @ApiTags('Auth')
 @Controller('auth')

@@ -1,8 +1,8 @@
 import {Test} from '@nestjs/testing';
-import {CreateUserService} from "../../../User/Services/create-user.service";
 import {RegisterController} from "../../Controllers/register.controller";
 import {PasswordService} from "../../Services/password.service";
 import {RegisterDTO} from "../../DTO/register.dto";
+import {CreateUserService} from "../../Services/create-user.service";
 
 const createUserServiceMock = () => ({
     create: jest.fn(),
