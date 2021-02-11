@@ -1,5 +1,6 @@
 import {ApiNotFoundResponse, ApiOkResponse, ApiTags} from "@nestjs/swagger";
-import {Controller, Get, Param, Res} from "@nestjs/common";
+import {Controller, Get, NotFoundException, Param, Res} from "@nestjs/common";
+import * as fs from 'fs';
 
 @ApiTags('Storage')
 @Controller('storage')
@@ -12,6 +13,12 @@ export class StorageController {
         @Param('file') file: string,
         @Res() res
     ) {
-        return res.sendFile(file, {root: `./storage/${directory}`});
+        const path = `./storage/${directory}/${file}`;
+
+        if (fs.existsSync(path)) {
+            return res.sendFile(file, {root: `./storage/${directory}`});
+        }
+
+        throw new NotFoundException();
     }
 }

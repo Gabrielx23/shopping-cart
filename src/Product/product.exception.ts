@@ -5,7 +5,7 @@ export class ProductException {
     return new NotFoundException('Product not exist!');
   }
 
-  public static productImageIsRequired(): NotFoundException {
+  public static productImageIsRequired(): BadRequestException {
     return new BadRequestException('Product image is required!');
   }
 }

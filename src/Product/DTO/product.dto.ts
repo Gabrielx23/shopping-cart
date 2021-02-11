@@ -1,4 +1,4 @@
-import {IsNotEmpty, IsString, Matches, MinLength} from 'class-validator';
+import {IsNotEmpty, IsString, Matches, Min, MinLength} from 'class-validator';
 import {ApiProperty} from '@nestjs/swagger';
 
 export class ProductDTO {

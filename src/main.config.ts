@@ -1,7 +1,8 @@
 import {UserEntity} from "./User/user.entity";
 import {ProductEntity} from "./Product/product.entity";
+import {BasketElementEntity} from "./Basket/basket-element.entity";
 
-export const databaseCredentialsConfig = () => ({
+export const mainConfig = () => ({
   port: Number(process.env.PORT),
   jwtSecret: process.env.JWT_SECRET,
   database: {
@@ -13,6 +14,6 @@ export const databaseCredentialsConfig = () => ({
     database: process.env.DB_DATABASE,
     synchronize: true,
     logging: false,
-    entities: [UserEntity, ProductEntity],
+    entities: [UserEntity, ProductEntity, BasketElementEntity],
   },
 });

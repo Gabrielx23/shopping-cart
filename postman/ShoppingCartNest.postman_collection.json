@@ -1,0 +1,345 @@
+{
+	"variables": [],
+	"info": {
+		"name": "ShoppingCartNest",
+		"_postman_id": "314232e1-b482-9ba5-c1c7-e3fe9fb330c4",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"description": "",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"url": "{{appUrl}}/auth/login",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"john.doe@hotmail.com\",\n  \"password\": \"testtest\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"url": "{{appUrl}}/auth/register",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john.doe@hotmail.com\",\n  \"password\": \"testtest\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"url": "{{appUrl}}/auth/logout",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{bearerToken}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "refresh",
+					"request": {
+						"url": "{{appUrl}}/auth/refresh",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG4uZG9lQGhvdG1haWwuY29tIiwiaWF0IjoxNjEyOTY4MDY1LCJleHAiOjE2MTI5ODk2NjV9.tc4lTyliFHjyBWGiZWqVV3S7bjZYu2eUBXckXSDEw7Q\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Storage",
+			"description": "",
+			"item": [
+				{
+					"name": "file",
+					"request": {
+						"url": "{{appUrl}}/storage/product-images/0a51cbf0-f959-4596-9694-894a620b140a.png",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"description": "",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"url": "{{appUrl}}/products",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{bearerToken}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Product 1",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "22",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"description": "",
+									"type": "file",
+									"src": "2.png"
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"url": "{{appUrl}}/products/d9058f30-f969-4b34-8bd2-d432f91f4558",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{bearerToken}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"description": "",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Modified name 1",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "11.99",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"value": "",
+									"description": "",
+									"type": "file"
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "get all",
+					"request": {
+						"url": {
+							"raw": "{{appUrl}}/products?page2&limit=3",
+							"host": [
+								"{{appUrl}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "page2",
+									"value": "",
+									"equals": false,
+									"description": ""
+								},
+								{
+									"key": "limit",
+									"value": "3",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "get one by id",
+					"request": {
+						"url": "{{appUrl}}/products/b4873f98-4f67-4d3f-94ba-25b5cb584018",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "delete by id",
+					"request": {
+						"url": "{{appUrl}}/products/b4873f98-4f67-4d3f-94ba-25b5cb584018",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{bearerToken}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Basket",
+			"description": "",
+			"item": [
+				{
+					"name": "add product to basket",
+					"request": {
+						"url": "{{appUrl}}/basket/39950acc-b78a-419d-bc4d-ff660e91da0b",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{bearerToken}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"quantity\": 133,\n\t\"productId\": \"58377a59-e5ca-4d75-bdd5-0bddde404923\",\n\t\"price\": \"4.44\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "basket summary",
+					"request": {
+						"url": "{{appUrl}}/basket/39950acc-b78a-419d-bc4d-ff660e91da0b",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{bearerToken}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "remove basket element",
+					"request": {
+						"url": "{{appUrl}}/basket/c4e7469f-f725-4ed4-9a73-f598ead21a71/c6b791a4-8247-43bf-a175-b7f97621778c",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{bearerToken}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "available baskets",
+					"request": {
+						"url": "{{appUrl}}/basket",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{bearerToken}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

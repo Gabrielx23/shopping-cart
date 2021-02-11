@@ -1,37 +1,34 @@
 import {
-    BaseEntity,
-    Column,
+    BaseEntity, Column,
     CreateDateColumn,
-    Entity, OneToMany,
+    Entity, ManyToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from 'typeorm';
 import {ApiProperty} from '@nestjs/swagger';
-import {Exclude} from "class-transformer";
-import {ProductInterface} from "./product.interface";
-import {BasketElementInterface} from "../Basket/basket-element.interface";
+import {BasketElementInterface} from "./basket-element.interface";
+import {UserInterface} from "../User/user.interface";
+import {ProductInterface} from "../Product/product.interface";
 
-@Entity('products')
-export class ProductEntity extends BaseEntity implements ProductInterface{
+@Entity('basket_elements')
+export class BasketElementEntity extends BaseEntity implements BasketElementInterface{
     @ApiProperty({example: '91e56daf-04ef-4bbc-abe7-5d3a8ee41101'})
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @OneToMany('BasketElementEntity', 'product')
-    basketElements: BasketElementInterface[];
+    @ManyToOne('UserEntity', 'baskets')
+    owner: UserInterface;
 
-    @ApiProperty({example: 'Product 1'})
-    @Column('text')
-    name: string;
+    @ManyToOne('ProductEntity', 'baskets')
+    product: ProductInterface;
 
     @ApiProperty({example: '12.99'})
     @Column('text')
     price: string;
 
-    @ApiProperty({example: 'http://localhost:3000/products/91e56daf-04ef-4bbc-abe7-5d3a8ee41101/image'})
-    @Column('text')
-    @Exclude()
-    image: string;
+    @ApiProperty({example: 5})
+    @Column('integer')
+    quantity: number;
 
     @ApiProperty({example: '2020-08-10T05:59:36.708Z'})
     @CreateDateColumn({

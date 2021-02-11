@@ -5,7 +5,7 @@ export class AuthException {
     return new UnauthorizedException('Authorization token is incorrect!');
   }
 
-  public static incorrectRefreshToken(): UnauthorizedException {
+  public static incorrectRefreshToken(): BadRequestException {
     return new BadRequestException('Refresh token is incorrect!');
   }
 }

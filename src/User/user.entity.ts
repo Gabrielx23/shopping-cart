@@ -2,20 +2,25 @@ import {
     BaseEntity,
     Column,
     CreateDateColumn,
-    Entity,
+    Entity, OneToMany,
     PrimaryGeneratedColumn,
     Unique,
     UpdateDateColumn,
 } from 'typeorm';
 import {ApiProperty} from '@nestjs/swagger';
 import {Exclude} from "class-transformer";
+import {UserInterface} from "./user.interface";
+import {BasketElementInterface} from "../Basket/basket-element.interface";
 
 @Entity('users')
 @Unique(['email'])
-export class UserEntity extends BaseEntity {
+export class UserEntity extends BaseEntity implements UserInterface {
     @ApiProperty({example: '91e56daf-04ef-4bbc-abe7-5d3a8ee41101'})
     @PrimaryGeneratedColumn('uuid')
     id: string;
+
+    @OneToMany('BasketElementEntity', 'owner')
+    basketElements: BasketElementInterface[];
 
     @ApiProperty({example: 'John Doe'})
     @Column('text')
@@ -27,11 +32,11 @@ export class UserEntity extends BaseEntity {
 
     @ApiProperty({example: 'Demo2020'})
     @Column('text')
-    @Exclude()
+    @Exclude({toPlainOnly: true})
     password: string;
 
     @Column({nullable: true})
-    @Exclude()
+    @Exclude({toPlainOnly: true})
     token: string;
 
     @ApiProperty({example: '2020-08-10T05:59:36.708Z'})
