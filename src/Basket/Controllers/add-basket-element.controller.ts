@@ -15,8 +15,6 @@ import {
 } from "@nestjs/common";
 import {AuthGuard} from "../../User/auth.guard";
 import {AddBasketElementService} from "../Services/add-basket-element.service";
-import {InjectRepository} from "@nestjs/typeorm";
-import {BasketElementRepository} from "../Repositories/basket-element.repository";
 import {AddBasketElementDTO} from "../DTO/add-basket-element.dto";
 import {BasketElementEntity} from "../basket-element.entity";
 import {ProductService} from "../../Product/Services/product.service";
@@ -30,8 +28,6 @@ import {UserException} from "../../User/Exceptions/user.exception";
 @Controller('basket')
 export class AddBasketElementController {
     constructor(
-        @InjectRepository(BasketElementRepository)
-        private readonly basketElements: BasketElementRepository,
         private readonly addBasketElementService: AddBasketElementService,
         private readonly productService: ProductService,
         private readonly userService: UserService,

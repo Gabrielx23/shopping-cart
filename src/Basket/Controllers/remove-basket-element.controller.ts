@@ -16,9 +16,7 @@ import {InjectRepository} from "@nestjs/typeorm";
 import {BasketElementRepository} from "../Repositories/basket-element.repository";
 import {BasketElementEntity} from "../basket-element.entity";
 import {UserService} from "../../User/Services/user.service";
-import {ProductException} from "../../Product/product.exception";
 import {RemoveBasketElementService} from "../Services/remove-basket-element.service";
-import {ProductService} from "../../Product/Services/product.service";
 import {BasketException} from "../basket.exception";
 import {LoggedUser} from "../../User/logged-user.decorator";
 import {UserEntity} from "../../User/user.entity";
@@ -32,7 +30,6 @@ export class RemoveBasketElementController {
         @InjectRepository(BasketElementRepository)
         private readonly basketElements: BasketElementRepository,
         private readonly removeBasketElementService: RemoveBasketElementService,
-        private readonly productService: ProductService,
         private readonly userService: UserService,
     ) {}
 
@@ -51,12 +48,6 @@ export class RemoveBasketElementController {
 
         if (!element) {
             throw BasketException.basketElementNotExist();
-        }
-
-        const product = await this.productService.getById(element.product.id);
-
-        if (!product) {
-            throw ProductException.productNotExist();
         }
 
         const owner = await this.userService.getById(ownerId);
