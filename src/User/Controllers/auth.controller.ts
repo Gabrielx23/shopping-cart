@@ -29,7 +29,7 @@ export class AuthController {
     @ApiBearerAuth()
     @ApiCreatedResponse()
     @ApiBadRequestResponse()
-    public async logout(@LoggedUser() user: UserEntity) {
+    public async logout(@LoggedUser() user: UserEntity): Promise<void> {
         await this.authService.logout(user);
     }
 
